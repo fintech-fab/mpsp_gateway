@@ -28,10 +28,7 @@
 
 		"iron-io/iron_mq": "dev-master",
 
-		"fintech-fab/bank-emulator": "dev-master",
 		"fintech-fab/bank-emulator-sdk": "dev-master",
-
-		"fintech-fab/money-transfer-emulator": "dev-master",
 		"fintech-fab/money-transfer-emulator-sdk": "dev-master",
 
 		"phpunit/phpunit": "4.2.*@dev",
