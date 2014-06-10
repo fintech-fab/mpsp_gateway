@@ -1,6 +1,6 @@
 <?php namespace FintechFab\MPSP\Services\Gates;
 
-use FintechFab\BankEmulatorSdk\GateWay;
+use FintechFab\BankEmulatorSdk\Gateway;
 use FintechFab\MPSP\Entities\Card;
 use FintechFab\MPSP\Exceptions\AcquiringException;
 use FintechFab\MPSP\Services\Gates\Results\EmulatorAcquiringResult;
@@ -12,7 +12,7 @@ class AcquiringEmulatorGate implements AcquiringInterface
 
 	private $gateway;
 
-	public function __construct(GateWay $gateway)
+	public function __construct(Gateway $gateway)
 	{
 		$this->gateway = $gateway;
 	}
