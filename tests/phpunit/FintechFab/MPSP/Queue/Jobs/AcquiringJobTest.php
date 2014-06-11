@@ -52,6 +52,9 @@ class AcquiringJobTest extends TestCase
 		$expireYear = 15;
 		$CVV = 331;
 
+		$irn = '3dsalkdkcjf192eic';
+		$rrn = 'dsz;kjdlu12co21';
+
 		// расшифровываем данные карты
 		$this->card->shouldReceive('doImport');
 
@@ -77,6 +80,13 @@ class AcquiringJobTest extends TestCase
 			->once()
 			->ordered();
 
+		$this->acquiringResult->shouldReceive('getResponseData')
+			->twice()
+			->andReturn([
+				'irn' => $irn,
+				'rrn' => $rrn,
+			]);
+
 		// кладем в очередь API результат
 		$this->queue->shouldReceive('push')
 			->with('acquiringResult', [
@@ -84,6 +94,8 @@ class AcquiringJobTest extends TestCase
 				'need_3ds'      => true,
 				'3ds_url'       => 'some_url',
 				'3ds_post_data' => 'some_data',
+				'irn' => $irn,
+				'rrn' => $rrn,
 			])
 			->once()
 			->ordered();
