@@ -11,7 +11,7 @@ class BankEmulatorServiceProvider extends ServiceProvider
 	{
 		$this->app->bind(Gateway::class, function () {
 
-			$config = Config::get('providers/bankemulator');
+			$config = Config::get('providers/bank_emulator');
 
 			return Gateway::newInstance($config);
 		});

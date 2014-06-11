@@ -19,8 +19,9 @@ class AcquiringRefundJob extends AbstractJob
 	{
 		$transferId = $requestData['transfer']['id'];
 
-		try {
+		Log::info('Do refund', $requestData);
 
+		try {
 			$this->acquring->doRefund($transferId, $requestData);
 
 			// сообщаем в API о результате

@@ -37,6 +37,8 @@ class AcquiringJob extends AbstractJob
 				'need_3ds'      => $result->isNeed3DS(),
 				'3ds_url'       => $result->get3DSUrl(),
 				'3ds_post_data' => $result->get3DSData(),
+				'irn'           => $result->getResponseData()['irn'],
+				'rrn'           => $result->getResponseData()['rrn'],
 			]);
 
 		} catch (AcquiringException $exception) {

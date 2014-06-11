@@ -6,6 +6,7 @@ use FintechFab\MPSP\Exceptions\AcquiringException;
 use FintechFab\MPSP\Services\Gates\Results\EmulatorAcquiringResult;
 use FintechFab\MPSP\Services\Interfaces\AcquiringInterface;
 use FintechFab\MPSP\Services\Interfaces\AcquiringResultInterface;
+use Log;
 
 class AcquiringEmulatorGate implements AcquiringInterface
 {
@@ -25,34 +26,26 @@ class AcquiringEmulatorGate implements AcquiringInterface
 	 * @param string                         $currency
 	 * @param float                          $amount
 	 *
+	 * @throws \FintechFab\MPSP\Exceptions\AcquiringException
 	 * @return AcquiringResultInterface
 	 */
 	public function doWithdraw($transferId, Card $card, $currency, $amount)
 	{
-		$success = $this->gateway->auth([
+		$success = $this->gateway->sale([
 			'orderId'      => $transferId,
 			'orderName'    => 'Order #' . $transferId,
 			'orderDesc'    => '',
-			'orderAmount'  => $amount,
+			'orderAmount'  => sprintf("%01.2f", $amount),
 			'cardNumber'   => $card->number,
 			'expiredYear'  => $card->expire_year,
 			'expiredMonth' => $card->expire_month,
 			'cvcCode'      => $card->cvv,
 		]);
 
-		if (!$success) {
-			return new EmulatorAcquiringResult(false);
-		}
-
-		$success = $this->gateway->complete([
-			'orderId'     => $this->gateway->getResultOrderId(),
-			'orderAmount' => $this->gateway->getResultAmount(),
-			'rrn'         => $this->gateway->getResultRRN(),
-			'irn'         => $this->gateway->getResultIRN(),
-		]);
+		Log::debug('BankEmulator sale response', [$this->gateway->getResultRaw()]);
 
 		if (!$success) {
-			return new EmulatorAcquiringResult(false);
+			throw new AcquiringException('Bad response');
 		}
 
 		$responseData = [
@@ -71,16 +64,21 @@ class AcquiringEmulatorGate implements AcquiringInterface
 	 * @param int   $transferId
 	 * @param array $additionalData
 	 *
+	 * @throws \FintechFab\MPSP\Exceptions\AcquiringException
 	 * @return bool
 	 */
 	public function doRefund($transferId, array $additionalData = [])
 	{
 		$success = $this->gateway->refund([
 			'orderId'     => $transferId,
-			'orderAmount' => $additionalData['amount'],
+			'orderAmount' => sprintf("%01.2f", $additionalData['amount']),
 			'rrn'         => $additionalData['rrn'],
 			'irn'         => $additionalData['irn'],
 		]);
+
+		if (!$success) {
+			throw new AcquiringException('Bad response');
+		}
 
 		return new EmulatorAcquiringResult($success);
 	}

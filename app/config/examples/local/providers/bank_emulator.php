@@ -3,7 +3,7 @@
 return [
 	'terminalId'    => null,
 	'secretKey'     => 'your-secret-key',
-	'gatewayUrl'    => 'http://fintech-fab.ru/bank/emulator/gateway',
+	'gatewayUrl'    => 'http://fintech-fab.ru/bank/emulator/demo/gateway',
 	'callbackEmail' => '',
 	'shopUrl'       => '',
 	'callbackUrl'   => '',
