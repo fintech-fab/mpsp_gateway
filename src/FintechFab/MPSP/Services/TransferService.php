@@ -45,7 +45,7 @@ class TransferService
 	}
 
 	/**
-	 * Вычислить стоимость комиссии для валюты $sCurrency
+	 * Вычислить стоимость комиссии
 	 *
 	 * @param int    $cityId
 	 * @param string $amount
