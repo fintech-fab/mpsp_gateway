@@ -1,19 +1,18 @@
 <?php namespace FintechFab\MPSP\Queue\Jobs;
 
-use FintechFab\MPSP\Services\TransferService;
+use MPSP;
 
 class CitiesListJob extends AbstractJob
 {
 
-	public function __construct(TransferService $transfer)
+	public function __construct()
 	{
-		$this->transfer = $transfer;
 		$this->apiQueue = $this->getAPIQueueInterface();
 	}
 
 	public function run(array $requestData)
 	{
-		$cities = $this->transfer->cities();
+		$cities = MPSP::cities();
 
 		$this->apiQueue->push('citiesListResult', [
 			'cities' => $cities,

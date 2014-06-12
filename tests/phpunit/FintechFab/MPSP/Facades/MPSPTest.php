@@ -21,7 +21,7 @@ class MPSPTest extends TestCase
 
 	public function test_getFacadeRoot()
 	{
-		$this->assertEquals(\FintechFab\MPSP\Facades\MPSP::class, get_class(MPSP::getFacadeRoot()));
+		$this->assertEquals(\FintechFab\MPSP\Facades\MPSP\BaseMPSP::class, get_class(MPSP::getFacadeRoot()));
 	}
 
 	public function test_withdraw()

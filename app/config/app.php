@@ -130,6 +130,8 @@ return [
 		\FintechFab\MPSP\Queue\QueueServiceProvider::class,
 		\FintechFab\MPSP\Sms\SmsServiceProvider::class,
 
+		\FintechFab\MPSP\Support\MPSPServiceProvider::class,
+
 	],
 
 	/*

@@ -2,14 +2,13 @@
 
 use FintechFab\MPSP\Entities\Card;
 use FintechFab\MPSP\Exceptions\AcquiringException;
-use FintechFab\MPSP\Services\AcquiringService;
+use MPSP;
 
 class AcquiringJob extends AbstractJob
 {
 
-	public function __construct(AcquiringService $acquiring, Card $card)
+	public function __construct(Card $card)
 	{
-		$this->acquiring = $acquiring;
 		$this->card = $card;
 		$this->apiQueue = $this->getAPIQueueInterface();
 	}
@@ -29,7 +28,7 @@ class AcquiringJob extends AbstractJob
 		$amount += $fee;
 
 		try {
-			$result = $this->acquiring->doWithdraw($transferId, $this->card, $currency, $amount);
+			$result = MPSP::withdraw($transferId, $this->card, $currency, $amount);
 
 			// сообщаем в API о результате
 			$this->apiQueue->push('acquiringResult', [

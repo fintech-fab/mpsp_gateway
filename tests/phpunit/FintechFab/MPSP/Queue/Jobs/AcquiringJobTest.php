@@ -2,18 +2,16 @@
 use FintechFab\MPSP\Entities\Card;
 use FintechFab\MPSP\Exceptions\AcquiringException;
 use FintechFab\MPSP\Queue\Jobs\AcquiringJob;
-use FintechFab\MPSP\Services\AcquiringService;
 use FintechFab\MPSP\Services\Interfaces\AcquiringResultInterface;
 use Illuminate\Queue\Jobs\Job;
 use Illuminate\Queue\QueueInterface;
 
 /**
- * @property \Mockery\MockInterface                                                                           $queue
- * @property \Mockery\MockInterface                                                                           $acquiringResult
- * @property \Mockery\MockInterface                                                                           $acquiring
- * @property \Mockery\MockInterface                                                                           $card
- * @property \Mockery\MockInterface|mixed                                                                     $job
- * @property AcquiringJob                                                                                     $acquiringJob
+ * @property \Mockery\MockInterface                                                                                            $queue
+ * @property \Mockery\MockInterface                                                                                            $acquiringResult
+ * @property \Mockery\MockInterface                                                                                            $card
+ * @property \Mockery\MockInterface|mixed                                                                                      $job
+ * @property AcquiringJob                                                                                                      $acquiringJob
  */
 class AcquiringJobTest extends TestCase
 {
@@ -24,7 +22,6 @@ class AcquiringJobTest extends TestCase
 
 		$this->queue = $this->mock(QueueInterface::class);
 		$this->acquiringResult = $this->mock(AcquiringResultInterface::class);
-		$this->acquiring = $this->mock(AcquiringService::class);
 		$this->card = $this->mock(Card::class);
 		$this->job = $this->mock(Job::class);
 
@@ -34,7 +31,7 @@ class AcquiringJobTest extends TestCase
 			->once()
 			->ordered();
 
-		$this->acquiringJob = new AcquiringJob($this->acquiring, $this->card);
+		$this->acquiringJob = new AcquiringJob($this->card);
 	}
 
 	/**
@@ -59,7 +56,7 @@ class AcquiringJobTest extends TestCase
 		$this->card->shouldReceive('doImport');
 
 		// снимаем деньги
-		$this->acquiring->shouldReceive('doWithdraw')
+		MPSP::shouldReceive('withdraw')
 			->with($transferId, $this->card, $currency, $amount + $fee)
 			->andReturn($this->acquiringResult)
 			->once()
@@ -131,7 +128,7 @@ class AcquiringJobTest extends TestCase
 	{
 		$this->card->shouldReceive('doImport');
 
-		$this->acquiring->shouldReceive('doWithdraw')
+		MPSP::shouldReceive('withdraw')
 			->andThrow(AcquiringException::class, 'exception_message', 111);
 
 		$this->queue->shouldReceive('push')
