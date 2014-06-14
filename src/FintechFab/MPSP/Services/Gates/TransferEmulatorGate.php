@@ -27,7 +27,14 @@ class TransferEmulatorGate implements TransferInterface
 
 	public function cities()
 	{
-		return $this->gateway->getCityList();
+		$cities = $this->gateway->getCityList();
+		if(!$cities){
+			Log::warning('Fetch empty city list');
+			Log::info('Gate response', $this->gateway->getResultRaw());
+			Log::info('Gate message', $this->gateway->getResultMessage());
+			return array();
+		}
+		return $cities;
 	}
 
 	public function fee($cityId, $amount)
