@@ -2,7 +2,7 @@
 
 return [
 	'terminalId'    => 1,
-	'secretKey'     => '',
+	'secretKey'     => '#paymentkey#',
 	'gatewayUrl'    => 'http://conf-#confid#.mpsp.dev/bank/emulator/demo/gateway',
 	'callbackEmail' => '',
 	'shopUrl'       => '',
