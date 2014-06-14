@@ -9,8 +9,6 @@ return [
 
 		\FintechFab\MPSP\Support\AcquiringBankEmulatorServiceProvider::class,
 		\FintechFab\MPSP\Support\TransferEmulatorServiceProvider::class,
-		\FintechFab\MoneyTransferEmulator\MoneyTransferEmulatorServiceProvider::class,
-		\FintechFab\BankEmulator\BankEmulatorServiceProvider::class,
 
 	],
 
