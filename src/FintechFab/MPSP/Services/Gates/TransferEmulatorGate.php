@@ -30,8 +30,8 @@ class TransferEmulatorGate implements TransferInterface
 		$cities = $this->gateway->getCityList();
 		if(!$cities){
 			Log::warning('Fetch empty city list');
-			Log::info('Gate response', $this->gateway->getResultRaw());
-			Log::info('Gate message', $this->gateway->getResultMessage());
+			Log::info('Gate response', [$this->gateway->getResultRaw()]);
+			Log::info('Gate message', [$this->gateway->getResultMessage()]);
 			return array();
 		}
 		return $cities;
