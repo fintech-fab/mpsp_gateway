@@ -124,9 +124,6 @@ return [
 		\FintechFab\MPSP\Commands\Support\CommandsServiceProvider::class,
 		\FintechFab\MPSP\Log\LogServiceProvider::class,
 
-		\FintechFab\MPSP\Support\AcquiringServiceProvider::class,
-		\FintechFab\MPSP\Support\TransferServiceProvider::class,
-
 		\FintechFab\MPSP\Queue\QueueServiceProvider::class,
 		\FintechFab\MPSP\Sms\SmsServiceProvider::class,
 
