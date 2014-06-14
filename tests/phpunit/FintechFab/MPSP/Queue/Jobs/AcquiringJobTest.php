@@ -18,6 +18,13 @@ use Illuminate\Queue\QueueInterface;
 class AcquiringJobTest extends TestCase
 {
 
+	/**
+	 * тестируем задачу пришедшую из сервера очередей (RabbitMQ, Beanstalk or ...), обработчик - AcquiringJob
+	 * при работе AcquiringJob использует много компонентов, ставит задачи в сервер очередей
+	 * НО МЫ ТЕСТИРУЕМ ТОЛЬКО ACQUIRINGJOB И ЕГО ЛОГИКУ!
+	 * все остальные взаимодействие заменяем моками, как собственные компоненты, так и фасады фреймворка
+	 * удостоверяемся, что компоненты действительно используется так, как мы задумали
+	 */
 	public function setUp()
 	{
 		parent::setUp();
