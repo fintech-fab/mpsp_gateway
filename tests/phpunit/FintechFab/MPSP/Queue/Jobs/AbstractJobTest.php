@@ -7,6 +7,10 @@ use Mockery\MockInterface;
 class AbstractJobTest extends TestCase
 {
 
+	/**
+	 * Создаем Mock методы для компонента Log, потому что нам нужно тестировать не физическую запись в логи,
+	 * а вызовы методов из компонента
+	 */
 	public function setUp()
 	{
 		parent::setUp();
