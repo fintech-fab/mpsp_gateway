@@ -1,9 +1,9 @@
 <?php
 
 return [
-	'terminalId'    => null,
-	'secretKey'     => 'your-secret-key',
-	'gatewayUrl'    => 'http://fintech-fab.ru/bank/emulator/demo/gateway',
+	'terminalId'    => 1,
+	'secretKey'     => '#paymentkey#',
+	'gatewayUrl'    => 'http://conf-#confid#.mpsp.dev/bank/emulator/demo/gateway',
 	'callbackEmail' => '',
 	'shopUrl'       => '',
 	'callbackUrl'   => '',
