@@ -13,6 +13,12 @@ use FintechFab\MPSP\Services\Interfaces\AcquiringResultInterface;
 class AcquiringServiceTest extends TestCase
 {
 
+	/**
+	 * Тестируется AcquiringService, который агрегирует банковский шлюз AcquiringInterface
+	 *
+	 * создаем mock объекты, которые будут использованы методами AcquiringService
+	 * при создании AcquiringService передаем фальшивый объект от AcquiringService
+	 */
 	public function setUp()
 	{
 		parent::setUp();
@@ -23,6 +29,9 @@ class AcquiringServiceTest extends TestCase
 		$this->acquiring = new AcquiringService($this->gate);
 	}
 
+	/**
+	 * тестируем списание средств
+	 */
 	public function testDoWithdraw()
 	{
 		$currency = 'RUR';

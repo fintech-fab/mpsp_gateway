@@ -20,9 +20,4 @@ class LogServiceProvider extends ServiceProvider
 		$this->app->instance('log', $logger);
 	}
 
-	public function boot()
-	{
-
-	}
-
 }
